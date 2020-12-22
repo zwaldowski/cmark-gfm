@@ -269,3 +269,11 @@ Pull request #128 - Buffer overread in tables extension
 <p>|
 -|</p>
 ````````````````````````````````
+
+Issue #334 - UTF-8 BOM
+
+```````````````````````````````` example
+﻿# Hi
+.
+<h1>Hi</h1>
+````````````````````````````````
