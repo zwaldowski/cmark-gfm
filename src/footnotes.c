@@ -30,6 +30,7 @@ void cmark_footnote_create(cmark_map *map, cmark_node *node) {
   ref->node = node;
   ref->entry.age = map->size;
   ref->entry.next = map->refs;
+  ref->entry.size += strlen((char*)reflabel);
 
   map->refs = (cmark_map_entry *)ref;
   map->size++;

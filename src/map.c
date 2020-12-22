@@ -73,6 +73,7 @@ static void sort_map(cmark_map *map) {
 
 cmark_map_entry *cmark_map_lookup(cmark_map *map, cmark_chunk *label) {
   cmark_map_entry **ref = NULL;
+  cmark_map_entry *r = NULL;
   unsigned char *norm;
 
   if (label->len < 1 || label->len > MAX_LINK_LABEL_LENGTH)
@@ -94,7 +95,13 @@ cmark_map_entry *cmark_map_lookup(cmark_map *map, cmark_chunk *label) {
   if (!ref)
     return NULL;
 
-  return ref[0];
+  r = ref[0];
+  /* Check for expansion limit */
+  if (map->max_ref_size && r->size > map->max_ref_size - map->ref_size)
+    return NULL;
+  map->ref_size += r->size;
+
+  return r;
 }
 
 void cmark_map_free(cmark_map *map) {
