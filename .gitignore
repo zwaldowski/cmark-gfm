@@ -39,3 +39,7 @@ alltests.md
 progit/
 bench/benchinput.md
 test/afl_results/
+
+# Swift Packages
+.DS_Store
+/.swiftpm
